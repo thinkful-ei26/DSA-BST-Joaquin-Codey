@@ -93,26 +93,38 @@ class BinaryTreeSearch {
   }
 }
 
-//Height of BST
+// Height of BST
 // Write an algorithm to find the height of a binary search tree. What is the run time of your algorithm?
-function heightBst() {
-  // traverse the tree on the left, and count nodes. 
-  // traverse the tree on the right and count nodes.
-  // take the max of these two values as the height
+// runtime => O(n^2)
+function heightBst(bst, count = 1, max = []) {
+  if(bst) {
+    if(!bst.left && !bst.right) {
+      max.push(count)
+    }
+    heightBst(bst.left, count + 1, max)
+    heightBst(bst.right, count + 1, max)
+  }
+  return max.sort()[max.length - 1]
+}
+
+// is it BST
+function isBst(data) {
+
 }
 
 function main() {
   let bst = new BinaryTreeSearch();
-  bst.insert(3);
+  bst.insert(6); // top
+
+  bst.insert(3); // left
   bst.insert(1);
   bst.insert(4);
-  bst.insert(6);
+  
+  bst.insert(15); // right
   bst.insert(9);
-  bst.insert(2);
-  bst.insert(5);
   bst.insert(7);
-  bst.remove(3);
-
-  console.log(bst);
+  return bst;
 }
-main();
+
+const bst = main();
+console.log(heightBst(bst));
