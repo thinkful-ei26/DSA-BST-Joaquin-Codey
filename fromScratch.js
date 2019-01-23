@@ -95,24 +95,34 @@ class BinaryTreeSearch {
 
 //Height of BST
 // Write an algorithm to find the height of a binary search tree. What is the run time of your algorithm?
-function heightBst() {
-  // traverse the tree on the left, and count nodes. 
+function heightBst(bst) {
+  let leftCounter = 0;
+  if (this.key.left) {
+    leftCounter++;
+    heightBst(bst);
+    return leftCounter;
+  } else return;
+  // traverse the tree on the left, and count nodes.
   // traverse the tree on the right and count nodes.
   // take the max of these two values as the height
 }
+// is it BST?
+// Write an algorithm to check whether an arbitrary binary tree is a binary search tree, assuming the tree does not contain duplicates
+// given a DS -> t/f. if bst, will 
 
 function main() {
   let bst = new BinaryTreeSearch();
-  bst.insert(3);
   bst.insert(1);
-  bst.insert(4);
-  bst.insert(6);
-  bst.insert(9);
   bst.insert(2);
+  bst.insert(3);
+  bst.insert(4);
   bst.insert(5);
+  bst.insert(6);
   bst.insert(7);
-  bst.remove(3);
+  bst.insert(8);
+  //   bst.remove(9);
 
   console.log(bst);
+  console.log('heightBst', heightBst(bst));
 }
 main();
