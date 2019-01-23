@@ -93,36 +93,53 @@ class BinaryTreeSearch {
   }
 }
 
-//Height of BST
+// Height of BST
 // Write an algorithm to find the height of a binary search tree. What is the run time of your algorithm?
-function heightBst(bst) {
-  let leftCounter = 0;
-  if (this.key.left) {
-    leftCounter++;
-    heightBst(bst);
-    return leftCounter;
-  } else return;
-  // traverse the tree on the left, and count nodes.
-  // traverse the tree on the right and count nodes.
-  // take the max of these two values as the height
+// runtime => O(n^2)
+function heightBst(bst, count = 1, max = []) {
+  if (bst) {
+    if (!bst.left && !bst.right) {
+      max.push(count);
+    }
+    heightBst(bst.left, count + 1, max);
+    heightBst(bst.right, count + 1, max);
+  }
+  return max.sort()[max.length - 1];
 }
+
 // is it BST?
 // Write an algorithm to check whether an arbitrary binary tree is a binary search tree, assuming the tree does not contain duplicates
-// given a DS -> t/f. if bst, will 
+// given a DS -> t/f. if bst, will have pattern larg child on rt and small child on left
+//
+
+function isBST(bst) {
+  //  iterate through each node of the ds, and test that it meets criteria:
+  // 1. left child key to the parent < right child key to the parent
+  if (bst) {
+    // we will iterate down each node to the end and at each step check that left node < parent && right node > parent
+    // if < && > && they exist
+    if (!(bst.left.key < this.key) && !(bst.right.ley > this.key)) {
+      return false;
+    }
+    isBST(bst.left);
+    isBST(bst.right);
+  } return true;
+}
+
 
 function main() {
   let bst = new BinaryTreeSearch();
-  bst.insert(1);
-  bst.insert(2);
-  bst.insert(3);
-  bst.insert(4);
-  bst.insert(5);
-  bst.insert(6);
-  bst.insert(7);
-  bst.insert(8);
-  //   bst.remove(9);
+  bst.insert(6); // top
 
-  console.log(bst);
-  console.log('heightBst', heightBst(bst));
+  bst.insert(3); // left
+  bst.insert(1);
+  bst.insert(4);
+
+  bst.insert(15); // right
+  bst.insert(9);
+  bst.insert(7);
+  return bst;
 }
-main();
+
+const bst = main();
+console.log(heightBst(bst));
