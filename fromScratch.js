@@ -110,22 +110,39 @@ function heightBst(bst, count = 1, max = []) {
 // is it BST?
 // Write an algorithm to check whether an arbitrary binary tree is a binary search tree, assuming the tree does not contain duplicates
 // given a DS -> t/f. if bst, will have pattern larg child on rt and small child on left
-//
-
 function isBST(bst) {
   //  iterate through each node of the ds, and test that it meets criteria:
   // 1. left child key to the parent < right child key to the parent
   if (bst) {
     // we will iterate down each node to the end and at each step check that left node < parent && right node > parent
     // if < && > && they exist
-    if (!(bst.left.key < this.key) && !(bst.right.ley > this.key)) {
+    if(bst.left && !(bst.left.key <= bst.key)) {
+      return false;
+    }
+    if(bst.right && !(bst.right.key >= bst.key)) {
       return false;
     }
     isBST(bst.left);
     isBST(bst.right);
-  } return true;
+    return true
+  } 
 }
 
+// Third largest node
+// go to the bottom on the bst right to left
+// from largest key get parent o
+
+// if largest value has parent with left child then left child is the 3rd largest
+// if largst value has parent with no left child then parent of parent is 3rd largest
+function thirdLargest(bst, val) {
+ if(bst) {
+    if(!bst.right) {
+      val = bst
+    }
+    thirdLargest(bst.right, val = 'soemthing')
+ }
+ return val
+}
 
 function main() {
   let bst = new BinaryTreeSearch();
@@ -137,9 +154,11 @@ function main() {
 
   bst.insert(15); // right
   bst.insert(9);
-  bst.insert(7);
+  bst.insert(17);
   return bst;
 }
 
 const bst = main();
-console.log(heightBst(bst));
+//console.log(heightBst(bst));
+//console.log(isBST(bst));
+console.log(thirdLargest(bst))
